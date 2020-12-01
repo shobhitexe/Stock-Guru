@@ -1,0 +1,134 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+    body{
+        background-color: rgba(255, 255, 255, 0.884);
+    }
+    th,td{
+        background-color: whitesmoke;
+    }
+    h1{
+    text-shadow: -3px -3px 6px #00000060;
+
+    }
+</style> 
+
+ 
+  
+<h1>My Portfolio</h1>
+<br/>
+<!-- <!<form action="{% url 'portfolio' %}" class="form-inline my-2 my-lg-0" method='POST'>
+    {% csrf_token %}
+    {{ pform }}
+  <input class="form-control mr-sm-2" type="search" placeholder="Add to portfolio" aria-label="Search" name="ticker">
+  <input class="form-control mr-sm-2" type="search" placeholder="Price" aria-label="Search" name="ticker">
+  <input class="form-control mr-sm-2" type="search" placeholder="No of Stocks"  aria-label="Search" name="ticker">
+  <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Stock</button> 
+</form>  -->
+<!-- <form method="POST">
+  {% csrf_token %}
+  <fieldset class="form-group">
+      {{ pform }}
+  </fieldset>
+  <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Donate</button>
+  </div>
+</form> -->
+<a href="{% url 'portfolio' %}">Add Stock</a>
+<br/>
+<br/>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Stock Price</th>
+        <th scope="col">Previous Close</th>
+        <th scope="col">Market Cap</th>
+        <th scope="col">YTD Change</th>
+        <th scope="col">52 Week High</th>
+        <th scope="col">52 Week Low</th>
+        <th scope="col">Buying Price</th>
+        <th scope="col">Number of Stocks</th>
+        <th scope="col">Delete Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if ticker1 %}
+      {% for list_item in out %}
+        <tr>       
+          <th scope="row">{{ list_item.companyName }}</th>
+          <td>${{list_item.latestPrice}}</td>
+          <td>{{list_item.previousClose}}</td>
+          <td>{{list_item.marketCap}}</td>
+          <td>{{list_item.ytdChange}}</td>
+          <td>{{list_item.week52High}}</td>
+          <td>{{list_item.week52Low}}</td>               
+        {% for stock in ticker1 %} 
+          {%if stock.ticker == list_item.symbol %}  
+            <td>{{ stock.price }}</th>
+            <td>{{stock.quantity}}</td>
+            <td><a href ="{% url 'delete' stock.id %}">Delete Stock</a><br/></td> 
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </tr>
+    </tbody>
+    {% endif %}
+  </table>
+   <h1>Watch List</h1>
+   <br/>
+   <!-- <form action="{% url 'dashboard' %}" class="form-inline my-2 my-lg-0" method='POST'>
+       {% csrf_token %}
+       {{form}}
+     <input class="form-control mr-sm-2" type="search" placeholder="Add to portfolio" aria-label="Search" name="ticker"> 
+     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Stock</button>
+   </form> -->
+   <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        {{ form }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Donate</button>
+    </div>
+  </form>
+   <br/>
+   <br/>
+   <table class="table table-bordered table-hover">
+       <thead class="thead-dark">
+         <tr>
+           <th scope="col">Company Name</th>
+           <th scope="col">Stock Price</th>
+           <th scope="col">Previous Close</th>
+           <th scope="col">Market Cap</th>
+           <th scope="col">YTD Change</th>
+           <th scope="col">52 Week High</th>
+           <th scope="col">52 Week Low</th>
+           <th scope="col">Delete Stock</th>
+         </tr>
+       </thead>
+       <tbody>
+       {% if ticker %}
+          {% for list_item in output %}
+          <tr>       
+            <th scope="row">{{ list_item.companyName }}</th>
+            <td>${{list_item.latestPrice}}</td>
+            <td>{{list_item.previousClose}}</td>
+            <td>{{list_item.marketCap}}</td>
+            <td>{{list_item.ytdChange}}</td>
+            <td>{{list_item.week52High}}</td>
+            <td>{{list_item.week52Low}}</td>
+            {% for wishlist in ticker %}
+              {%if wishlist.ticker == list_item.symbol %}
+                <td><a href ="{% url 'deletestock' wishlist.id %}">Delete Stock</a><br/></td> 
+              {% endif %}
+            {% endfor %}          
+          </tr>
+          {% endfor %}
+        {% endif %}
+       </tbody>
+       
+     </table>
+   
+ 
+ {% endblock %} 

@@ -1,0 +1,135 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<style> 
+img.center
+{
+    display: block;
+    margin: 0 auto;
+}
+b 
+{
+    color:rgb(255, 238, 82);
+    font-size: 30px;
+    font-weight: 400;
+}
+</style>
+
+<!-- <head> 
+  <title>Prediction</title> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
+</head> -->
+
+
+<body> 
+    <div> 
+        <form action="{% url 'result' %}">
+            <b>Select a Stock :</b>
+            <select name="Stock" id="stock">
+                <option value="ADANIPORTS">Adani Ports</option>
+                <option value="ASIANPAINT">Asian Paint</option>
+                <option value="AXISBANK">Axis Bank</option>
+                <option value="BAJAJFINSV">Bajaj Finserv</option>
+                <option value="BAJFINANCE">Bajaj Finance</option>
+                <option value="BHARTIARTL">Bharti Airtel</option>
+                <option value="BPCL">BPCL</option>
+                <option value="BRITANNIA">Britannia
+                </option>
+                <option value="CIPLA">Cipla
+                </option>
+                <option value="COALINDIA">Coal
+                India
+                </option>
+                <option value="DRREDDY">DR Reddy
+                </option>
+                <option value="GAIL">Gail
+                </option>
+                <option value="GRASIM">Grasim
+                </option>
+                <option value="HCLTECH">HCL Tech
+                </option>
+                <option value="HDFC">HDFC
+                </option>
+                <option value="HDFCBANK">HDFC Bank
+                </option>
+                <option value="HEROMOTOCO">Hero MotoCorp
+                <option value="HINDALCO">Hindalco
+                </option>
+               <!-- <option value="HINDUNILVR">Hindustan Unilever
+                </option> -->
+            </select>
+            <br><br>
+            <input type="submit" name="" value="Predict">
+        </form>
+        <br> 
+        <br> 
+        <br>
+    </div>
+
+    <div> 
+        <h2 class="text-center"><u>About Our Model</u></h2><br>
+        <!-- <img class="center" src="../../../media/accuracy.png"/> -->
+        <br> 
+        <br> 
+        <br>
+        <div class="container"> 
+            <h2 class="text-center"><u>Predicted Closing Price for Next Day VS Actual Closing Price for DRREDDY</u></h2><br>             
+            <table class="table table-dark table-striped"> 
+              <thead> 
+                <tr> 
+                  <th>Date</th> 
+                  <th>Predicted Close</th> 
+                  <th>Actual Close</th> 
+                </tr> 
+              </thead> 
+              <tbody>  
+                <tr> 
+                  <td>2020-11-13</td> 
+                  <td>4823.954102</td>
+                  <td>4856.90</td>
+                </tr>
+                <tr> 
+                    <td>2020-11-17</td> 
+                    <td>4845.628418</td>
+                    <td>4784.15</td>
+                </tr>
+                <tr> 
+                    <td>2020-11-18</td> 
+                    <td>4836.188965</td>
+                    <td>4703.80</td>
+                </tr>  
+                <tr> 
+                    <td>2020-11-19</td> 
+                    <td>4790.4375</td>
+                    <td>4707.70</td>
+                </tr> 
+                <tr> 
+                    <td>2020-11-20</td> 
+                    <td>4744.980469</td>
+                    <td>4670.95</td>
+                </tr> 
+                <tr> 
+                    <td>2020-11-23</td> 
+                    <td>4712.62793</td>
+                    <td>4828.75</td>
+                </tr> 
+                <tr> 
+                    <td>2020-11-24</td> 
+                    <td>4737.685059</td>
+                    <td>4915.50</td>
+                </tr> 
+              </tbody> 
+            </table> 
+            <h2 class="text-center"><u>Conclusion: Thus our model currently is capable of predicting Closing Price of a stock for the next day with a Mean Absolute Percentage Error of 2%</u></h2><br>    
+            <br> 
+            <br> 
+            <br>
+          </div>
+    </div>
+
+{% endblock %}

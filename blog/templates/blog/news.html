@@ -1,0 +1,218 @@
+{% extends 'blog/base_without_sidebar.html' %}
+{% load static %}
+
+{% block css %}
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  h1.text-2xl.font-medium.title-font.mb-4.text-gray-900.tracking-widest {
+    font-size: 45px;
+    font-weight: 700;
+}
+.text-base {
+    font-size: 20px;
+    font-weight: 700;
+}
+h2.title-font.font-medium.text-lg.text-gray-900 {
+    font-size: 10px;
+    font-weight: 600;
+}
+h3.text-gray-500.mb-3 {
+    font-weight: 800;
+    color: blue;
+    font-size: 20px;
+}
+p.mb-4, p.mb-8.leading-relaxed {
+    font-size: 18px;
+}
+.sm\:text-4xl {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="text-gray-700 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">Recommended News</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">TOP 4 NEWS ON COVID.</p>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <div class="p-4 lg:w-1/2">
+          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+            <img  alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2020/10/31/Pictures/delhi-covid-19-test_ae8fddde-1b02-11eb-bfd3-008a2bae3f6c.jpg">
+            <div class="flex-grow sm:pl-8">
+              <h2 class="title-font font-medium text-lg text-gray-900">HindustanTimes</h2>
+              <h3 class="text-gray-500 mb-3">COVID19</h3>
+              <a href="https://www.hindustantimes.com/india-news/alarm-over-new-covid-19-cases-in-delhi-centre-may-step-in/story-yrEwibCGA3GPrkAUq9KpiK.html"><p class="mb-4">Covid-cases in Delhi surged to a new high on Friday even as a concerned home ministry has called for a meeting on Monday to discuss the issue.</p>
+              <span class="inline-flex">
+                <a class="text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 lg:w-1/2">
+          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+            <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://img.etimg.com/thumb/msid-78943435,width-294,resizemode-4,imgsize-74067/latest-daily-news-and-updates-october30.jpg">
+            <div class="flex-grow sm:pl-8">
+              <h2 class="title-font font-medium text-lg text-gray-900">THE ECONOMIC TIMES</h2>
+              <h3 class="text-gray-500 mb-3">COVID19</h3>
+              <a href="https://economictimes.indiatimes.com/news/newsblogs/latest-daily-news-and-updates-october30/liveblog/78943435.cms"><p class="mb-4">Wrap Up: All you need to know about the news that matter.</p>
+              <span class="inline-flex">
+                <a class="text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 lg:w-1/2">
+          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+            <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8UVSY4XsdDMLCuSEfGrX5Nz1BGQTu0y22xeCv2SNUCp8vowSngiARTy8&usqp=CAI&s">
+            <div class="flex-grow sm:pl-8">
+              <h2 class="title-font font-medium text-lg text-gray-900">Mumbai Mirror</h2>
+              <h3 class="text-gray-500 mb-3">Covid19</h3>
+              <a href="https://mumbaimirror.indiatimes.com/coronavirus/news/covid-19-latest-updates-mumbai-india-thane-maharashtra-active-cases-pune/liveblog/78963230.cms"><p class="mb-4">Covid-19 Latest Updates: Maharashtra reports 5,548 new cases; Mumbai's death toll climbs to 10,250</p>
+              <span class="inline-flex">
+                <a class="text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 lg:w-1/2">
+          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+            <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://static.toiimg.com/thumb/msid-78902350,height-127,resizemode-4,imgsize-62204.cms">
+            <div class="flex-grow sm:pl-8">
+              <h2 class="title-font font-medium text-lg text-gray-900">Times Of India</h2>
+              <h3 class="text-gray-500 mb-3">COVID CASES</h3>
+              <a href="https://timesofindia.indiatimes.com/city/28-october-2020-live-latest-news-from-cities/liveblog/78902350.cms"><p class="mb-4">Latest news live: Delhi's daily Covid tally crosses 5,000-mark for first time.</p>
+              <span class="inline-flex">
+                <a class="text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                  </svg>
+                </a>
+                <a class="ml-2 text-gray-500">
+                  <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+        <img class="object-cover object-center rounded" alt="hero" src="https://cdn-b.medlife.com/2020/03/coronavirus-dos-donts.jpg">
+      </div>
+      <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">COVID-19: 10 Do’s and Don’ts To Stay Safe During The Outbreaks
+          <br class="hidden lg:inline-block">
+        </h1>
+        <p class="mb-8 leading-relaxed">COVID-19, a global epidemic that has affected 1,99,054 and counting has turned out to be a deadly virus that threatens the very existence of the human race. Well, the major reason being the lack of vaccination and cure is what has made this seem dangerous.</p>
+        <div class="flex justify-center">
+          <a href="https://www.medlife.com/blog/covid-19-dos-and-donts/"><button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">click here</button>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Explained | Why does gold shine when economies don’t?
+          <br class="hidden lg:inline-block">
+        </h1>
+        <p class="mb-8 leading-relaxed"> Be it an economic slowdown in 2001, the global financial crisis in 2008, or the European debt crisis in 2013, the yellow metal always shines even when economies struggle</p>
+        <div class="flex justify-center">
+          <a href="https://www.moneycontrol.com/news/markets-on-coronavirus-368.html"><button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">click here</button>
+          
+        </div>
+      </div>
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+        <img class="object-cover object-center rounded" alt="hero" src="../../../media/gold.jpg">
+      </div>
+    </div>
+  </section>
+  <section class="text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+        <img class="object-cover object-center rounded" alt="hero" src="../../../media/coin.jpg">
+      </div>
+      <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Government mulls further measures for NBFCs, markets: Report
+          <br class="hidden lg:inline-block">
+        </h1>
+        <p class="mb-8 leading-relaxed">At a meeting chaired by FM Sitharaman, RBI officials raised concerns over liquidity challenges being faced by NBFCs and various state and micro finances.
+        </p>
+        <p class="mb-8 leading-relaxed">The Centre is planning additional policy measures for non-banking finance companies (NBFCs), along with regulatory changes in financial markets.
+
+          Finance Minister Nirmala Sitharaman on May 28 chaired a meeting of the Financial Stability and Development Council (FSDC).
+        </p>
+        <div class="flex justify-center">
+         <a href="https://www.moneycontrol.com/news/markets-on-coronavirus-368.html"> <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">click here</button>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+{% endblock %}
+
+{% block js %}
+{% endblock %}

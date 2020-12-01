@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+    .col-md-8, .col-md-4 {
+    margin-top: 20px;
+}
+    article.media.content-section, .content-section {
+    border-radius: 20px;
+    box-shadow: -7px -7px 14px #00000060;
+}
+h1{
+    margin-top: 100px;
+    margin-bottom: 20px;
+    color: #f4f805f8;
+}
+</style>
+<h1 style="text-align: center;">Discussion forum</h1>
+
+    <div class="row">
+        
+        <div class="col-md-8">
+            {% for post in posts %}
+                <article class="media content-section">
+                <img class = "rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                <div class="media-body">
+                    <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'profile-view' post.author.profile.id %}">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                    <p class="article-content">{{ post.content }}</p>
+                </div> 
+                </article>
+            {% endfor %}
+        </div>
+        <div class="col-md-4" id="category-list">
+            <div class="content-section">
+                <h3>Feed</h3>
+                <p class='text-muted'>Topics to read upon.
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Finance</li>
+                    <li class="list-group-item list-group-item-light">Economics</li>
+                    <li class="list-group-item list-group-item-light">Corona Virus</li>
+                    <li class="list-group-item list-group-item-light">Tip of the Day</li>
+                    <li class="list-group-item list-group-item-light">Others</li>
+                </ul>
+                </p>
+            </div>
+         </div>
+    </div>
+       
+{% endblock content%}

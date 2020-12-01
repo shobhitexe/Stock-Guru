@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Create a new blog post{% endblock %}
+<style>
+    h1, h2, h3, h4, h5, h6 {
+    color: #f4f805f8;
+  }
+</style>
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Add Comment on blog Post</h2>
+<div class="form-group">
+    <form method=POST>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success">Add Comment</button>
+    </form>
+</div> 
+{% else %}
+You are not authenticated
+{% endif %}
+{% endblock %}
