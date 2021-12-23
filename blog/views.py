@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 import sqlalchemy
 import pymysql
 import json
+from dotenv import load_dotenv,find_dotenv
+load_dotenv(find_dotenv())
+import os
 
 
 def home(request):
@@ -23,7 +26,12 @@ def predict(request):
 
 def result(request):
     stock=request.GET['Stock']
-    engine=sqlalchemy.create_engine('postgresql://byovyzzesirbtv:cd0eb4ae26a6e51cc8863d98ec04ba7de936ffc6e9f19ee634e6de9f175ba41c@ec2-3-215-27-13.compute-1.amazonaws.com:5432/d80a9b7jvcpord', pool_recycle=3600)
+    username = os.getenv('UNAME')
+    password = os.getenv('PASSWORD')
+    host = os.getenv('HOST')
+    database_name = os.getenv('DATABASE_NAME')
+    conn_string = 'postgresql://'+username+':'+password+'@'+host+'/'+database_name
+    engine=sqlalchemy.create_engine(conn_string, pool_recycle=3600)
     conn=engine.connect()
     predictor=Predictor()
     dataset=predictor.readsql(stock.lower(),conn)
