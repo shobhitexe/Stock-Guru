@@ -1,0 +1,132 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+    body{
+        background-color: rgba(255, 255, 255, 0.884);
+    }
+    th,td{
+        background-color: whitesmoke;
+    }
+    h1{
+    text-shadow: -3px -3px 6px #00000060;
+
+    }
+</style>
+<!-- <div class="row d-flex justify-content-center">
+<div class="col-9">
+<h1 class='my-4' style="text-align: center;">My Dashboard</h1>
+    <legend class="border-bottom mb-4">My donations to NGOs</legend>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Receiver</th>
+            <th scope="col">Category</th>
+            <th scope="col">Date</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for donation in donations %}
+          <tr>
+            <th scope="row">{{ donation.receiver }}</th>
+            <td>{{ donation.category }}</td>
+            <td>{{ donation.date|date:"F d, Y" }}</td>
+            <td>{{ donation.quantity }}</td>
+          </tr>
+        {% endfor %}  
+        </tbody>
+      </table>
+    {% if user.profile.ngo == True %}
+    <legend class="border-bottom mb-4">Donations recieved from following NGOs</legend>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sender</th>
+            <th scope="col">Category</th>
+            <th scope="col">Date</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for donation in recieved %}
+          <tr>
+            <th scope="row">{{ donation.donor }}</th>
+            <td>{{ donation.category }}</td>
+            <td>{{ donation.date|date:"F d, Y" }}</td>
+            <td>{{ donation.quantity }}</td>
+          </tr>
+        {% endfor %}  
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+
+    <div class="col-3">
+      <img style="width: 20vw; height: 60vh; padding-top: 15vh;" src="../../../media/donate.png"/>
+      <img style="width: 20vw; height: 60vh; padding-top: 15vh;" src="../../../media/help.png"/>
+    </div>
+    
+</div>
+
+ -->
+ 
+<h1>My Portfolio</h1>
+ <br/>
+ <!-- <form action="{% url 'portfolio' %}" class="form-inline my-2 my-lg-0" method='POST'>
+     {% csrf_token %}
+   <input class="form-control mr-sm-2" type="search" placeholder="Add to portfolio" aria-label="Search" name="ticker">
+   <input class="form-control mr-sm-2" type="search" placeholder="Price" aria-label="Search" name="ticker">
+   <input class="form-control mr-sm-2" type="search" placeholder="No of Stocks"  aria-label="Search" name="ticker">
+   <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Stock</button>
+ </form> -->
+ <form method="POST">
+  {% csrf_token %}
+  <fieldset class="form-group">
+      {{ pform }}
+  </fieldset>
+  <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Add to Portfolio</button>
+  </div>
+</form>
+ <br/>
+ <br/>
+ <table class="table table-bordered table-hover">
+     <thead class="thead-dark">
+       <tr>
+         <th scope="col">Company Name</th>
+         <th scope="col">Stock Price</th>
+         <th scope="col">Previous Close</th>
+         <th scope="col">Market Cap</th>
+         <th scope="col">YTD Change</th>
+         <th scope="col">52 Week High</th>
+         <th scope="col">52 Week Low</th>
+         <th scope="col">Buying Price</th>
+         <th scope="col">Number of Stocks</th>
+         <th scope="col">Delete Stock</th>
+       </tr>
+     </thead>
+     <tbody>
+      {% if ticker %}
+      {% for list_item in out %}
+        <tr>       
+          <th scope="row">{{ list_item.companyName }}</th>
+          <td>${{list_item.latestPrice}}</td>
+          <td>{{list_item.previousClose}}</td>
+          <td>{{list_item.marketCap}}</td>
+          <td>{{list_item.ytdChange}}</td>
+          <td>{{list_item.week52High}}</td>
+          <td>{{list_item.week52Low}}</td>               
+        {% for stock in ticker %} 
+          {%if stock.ticker == list_item.symbol %}  
+            <td>{{ stock.price }}</th>
+            <td>{{stock.quantity}}</td>
+            <td><a href ="{% url 'delete' stock.id %}">Delete Stock</a><br/></td> 
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </tr>
+    </tbody>
+    {% endif %}
+   </table>
+ 
+ {% endblock %}
