@@ -12,12 +12,10 @@ import holidays
 import datetime
 from plotly.offline import download_plotlyjs,init_notebook_mode,plot,iplot
 import plotly.graph_objects as go
-import tensorflow
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import load_model
 from nsepy import get_history
 from django.apps import apps
-import os
 
 class Post(models.Model):
     title = models.CharField(max_length = 100)
