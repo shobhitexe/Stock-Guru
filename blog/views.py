@@ -8,11 +8,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
 import sqlalchemy
-import pymysql
 import json
 from dotenv import load_dotenv,find_dotenv
 load_dotenv(find_dotenv())
 import os
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent  
 
 
 def home(request):
@@ -26,16 +27,9 @@ def predict(request):
 
 def result(request):
     stock=request.GET['Stock']
-    username = os.getenv('UNAME')
-    password = os.getenv('PASSWORD')
-    host = os.getenv('HOST')
-    database_name = os.getenv('DATABASE_NAME')
-    conn_string = 'postgresql://'+username+':'+password+'@'+host+'/'+database_name
-    engine=sqlalchemy.create_engine(conn_string, pool_recycle=3600)
-    conn=engine.connect()
     predictor=Predictor()
-    dataset=predictor.readsql(stock.lower(),conn)
-    dataset=predictor.get_live_data(stock,dataset,conn)
+    dataset=predictor.readsql(stock.title())
+    dataset=predictor.get_live_data(stock,dataset)
     predicted_df=predictor.predict(dataset,stock)
     historic_plot=predictor.show_historic(dataset,stock)
     predicted_plot=predictor.show_prediction(predicted_df,stock)
@@ -45,6 +39,21 @@ def result(request):
     prediction = json.loads(predicted_json) 
     context = {'prediction': prediction,'predicted_plot':predicted_plot,'historic_plot': historic_plot } 
     return render(request,'blog/result.html',context)
+
+    # stock=request.GET['Stock']
+    # predictor=Predictor()
+    # dataset=predictor.readsql(stock.title())
+    # dataset=predictor.get_live_data(stock,dataset)
+    # predicted_df=predictor.predict(dataset,stock)
+    # historic_plot=predictor.show_historic(dataset,stock)
+    # predicted_plot=predictor.show_prediction(predicted_df,stock)
+    # predicted_df.index=predicted_df.index.strftime('%Y-%m-%d')
+    # predicted_json = predicted_df.reset_index().to_json(orient ='records') 
+    # prediction = [] 
+    # prediction = json.loads(predicted_json) 
+    # context = {'prediction': prediction,'predicted_plot':predicted_plot,'historic_plot': historic_plot } 
+    # return render(request,'blog/result.html',context)
+
 
 
 # def DonateView(request):

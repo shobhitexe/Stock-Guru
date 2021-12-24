@@ -22,7 +22,8 @@ import tensorflow
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import load_model
 from nsepy import get_history
-  
+from django.apps import apps
+import os
 
 class Post(models.Model):
     title = models.CharField(max_length = 100)
@@ -74,12 +75,17 @@ class Comment(models.Model):
 
 class Predictor(models.Model):
     window=60
-    def writetosql(self,stock,dataset,con):
-        dataset.to_sql(stock,con,index=False,if_exists='append')
 
-    def readsql(self,stock,con):
-        query='SELECT close,date FROM '+stock
-        dataset=pd.read_sql(query,con)
+    def writetosql(self,stock,dataset):
+        model = apps.get_model('blog', stock)
+        row_iter = dataset.iterrows()
+        objs = [model(close = row['Close'],date  = row['Date'])
+        for index, row in row_iter]
+        model.objects.bulk_create(objs)
+
+    def readsql(self,stock):
+        model = apps.get_model('blog', stock)
+        dataset = pd.DataFrame(list(model.objects.all().values()))
         return dataset
 
     def isWeekend(self,date):
@@ -92,18 +98,25 @@ class Predictor(models.Model):
         india_holidays=holidays.India(years=datetime.datetime.now().year)
         return (date in india_holidays)
 
-    def get_live_data(self,stock,dataset,conn):
-        if dataset['date'][len(dataset)-1] < datetime.date.today():
+    def get_live_data(self,stock,dataset):
+        if dataset.empty or dataset['date'][len(dataset)-1] < datetime.date.today():
+            start = None
+            end = datetime.date.today()
+            if dataset.empty:
+                start = datetime.date(2000,1,1)
+            else:
+                start=dataset['date'][len(dataset)-1] + datetime.timedelta(days=1)
             try:
-                newdf = get_history(symbol=stock, start=dataset['date'][len(dataset)-1] + datetime.timedelta(days=1), 
-                    end=datetime.date.today())[['close']]
-                newdf = newdf[['close']]
-                newdf['date']= newdf.index
+                newdf = get_history(symbol=stock, start=start, 
+                    end=end)
+                newdf = newdf[['Close']]
+                newdf['Date']= newdf.index
                 newdf.dropna(inplace=True)
-                self.writetosql(stock.lower(),newdf,conn)
+                newdf.drop_duplicates(subset=['Date'], keep='last',inplace=True)
+                self.writetosql(stock.title(),newdf)
             except:
                 pass
-        return self.readsql(stock.lower(),conn)
+        return self.readsql(stock.title())
     
     def predict(self,dataset,stock):
         scaler=MinMaxScaler(feature_range=(0,1))
@@ -144,3 +157,442 @@ class Predictor(models.Model):
         return plot_div
     
     
+
+class Adaniports(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='adaniports'
+
+
+class Asianpaint(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        verbose_name_plural ='asianpaint'
+
+
+class Axisbank(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='axisbank'
+
+
+class Bajajfinsv(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='bajajfinsv'
+
+
+class Bajfinance(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='bajfinance'
+
+
+class Bhartiartl(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='bhartiartl'
+
+
+class Bpcl(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='bpcl'
+
+
+class Britannia(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='britannia'
+
+
+class Cipla(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='cipla'
+
+
+class Coalindia(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='coalindia'
+
+
+class Drreddy(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='drreddy'
+
+
+class Eichermot(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='eichermot'
+
+
+class Gail(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='gail'
+
+
+class Grasim(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='grasim'
+
+
+class Hcltech(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='hcltech'
+
+
+class Hdfc(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='hdfc'
+
+
+class Hdfcbank(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='hdfcbank'
+
+
+class Heromotoco(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='heromotoco'
+
+
+class Hindalco(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='hindalco'
+
+
+class Hindunilvr(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='hindunilvr'
+
+
+class Icicibank(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='icicibank'
+
+
+class Indusindbk(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='indusindbk'
+
+
+class Infratel(models.Model):
+    close = models.TextField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.TextField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='infratel'
+
+
+class Infy(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='infy'
+
+
+class Ioc(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='ioc'
+
+
+class Itc(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='itc'
+
+
+class Jswsteel(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='jswsteel'
+
+
+class Kotakbank(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='kotakbank'
+
+
+class Lt(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='lt'
+
+
+class MM(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='m&m'
+
+
+class Maruti(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='maruti'
+
+
+class Nestleind(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='nestleind'
+
+
+class Ntpc(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='ntpc'
+
+
+class Ongc(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='ongc'
+
+
+class Powergrid(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='powergrid'
+
+
+class Reliance(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='reliance'
+
+
+class Sbin(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='sbin'
+
+
+class Shreecem(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='shreecem'
+
+
+class Sunpharma(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='sunpharma'
+
+
+class Tatamotors(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='tatamotors'
+
+
+class Tatasteel(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='tatasteel'
+
+
+class Tcs(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='tcs'
+
+
+class Techm(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='techm'
+
+
+class Titan(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='titan'
+
+
+class Ultracemco(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='ultracemco'
+
+
+class Upl(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='upl'
+
+
+class Vedl(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='vedl'
+
+
+class Wipro(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='wipro'
+
+
+class Zeel(models.Model):
+    close = models.FloatField(db_column='Close', blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=False, null=False, primary_key = True)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        verbose_name_plural ='zeel'
