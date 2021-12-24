@@ -5,12 +5,6 @@ from django.urls import reverse
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import urllib.request
-from pprint import pprint
-from html_table_parser import HTMLTableParser
-import warnings
-import sqlalchemy
-import pymysql
 import cufflinks as cf
 import chart_studio.plotly as ply
 import plotly.express as px

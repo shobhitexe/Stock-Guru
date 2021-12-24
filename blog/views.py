@@ -7,11 +7,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
-import sqlalchemy
 import json
 from dotenv import load_dotenv,find_dotenv
 load_dotenv(find_dotenv())
-import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent  
 
