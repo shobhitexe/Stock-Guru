@@ -14,8 +14,10 @@ from plotly.offline import download_plotlyjs,init_notebook_mode,plot,iplot
 import plotly.graph_objects as go
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import load_model
-from nsepy import get_history
+import yfinance as yf
 from django.apps import apps
+from django_start.base_settings import BASE_DIR
+import os
 
 class Post(models.Model):
     title = models.CharField(max_length = 100)
@@ -99,8 +101,7 @@ class Predictor(models.Model):
             else:
                 start=dataset['date'][len(dataset)-1] + datetime.timedelta(days=1)
             try:
-                newdf = get_history(symbol=stock, start=start, 
-                    end=end)
+                newdf = yf.download(stock+'.NS',start,end)
                 newdf = newdf[['Close']]
                 newdf['Date']= newdf.index
                 newdf.dropna(inplace=True)
@@ -116,7 +117,8 @@ class Predictor(models.Model):
         testing=training[-self.window:]
         testing['Scaled']=scaler.fit_transform(testing)
         testing.index=pd.to_datetime(dataset['date'][-self.window:])
-        model=load_model('blog/trainedmodels/'+stock+'.h5')
+        model_path = os.path.join(BASE_DIR,'blog','trainedmodels',stock+'.h5')
+        model=load_model(model_path)
         for i in range (30):
             x_test=[]
             x_test.append(testing['Scaled'][-self.window:])

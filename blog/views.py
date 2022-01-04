@@ -28,8 +28,6 @@ def result(request):
     stock=request.GET['Stock']
     predictor=Predictor()
     dataset=predictor.readsql(stock.title())
-    print(stock)
-    print(dataset)
     dataset=predictor.get_live_data(stock,dataset)
     predicted_df=predictor.predict(dataset,stock)
     historic_plot=predictor.show_historic(dataset,stock)
@@ -41,34 +39,6 @@ def result(request):
     context = {'prediction': prediction,'predicted_plot':predicted_plot,'historic_plot': historic_plot } 
     return render(request,'blog/result.html',context)
 
-    # stock=request.GET['Stock']
-    # predictor=Predictor()
-    # dataset=predictor.readsql(stock.title())
-    # dataset=predictor.get_live_data(stock,dataset)
-    # predicted_df=predictor.predict(dataset,stock)
-    # historic_plot=predictor.show_historic(dataset,stock)
-    # predicted_plot=predictor.show_prediction(predicted_df,stock)
-    # predicted_df.index=predicted_df.index.strftime('%Y-%m-%d')
-    # predicted_json = predicted_df.reset_index().to_json(orient ='records') 
-    # prediction = [] 
-    # prediction = json.loads(predicted_json) 
-    # context = {'prediction': prediction,'predicted_plot':predicted_plot,'historic_plot': historic_plot } 
-    # return render(request,'blog/result.html',context)
-
-
-
-# def DonateView(request):
-#     if request.method == 'POST':
-#         form = Form(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             model = Donation()
-#             model.donor = self.request.user
-#             messages.success(request, f'Thankyou!')
-#             return redirect('dashboard')
-#     else:
-#         form = Form()
-#     return render(request, 'blog/donate.html', {'form': form})
 
 class PostListView(ListView):
     model = Post
@@ -79,38 +49,6 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
-# class PostDetailView(DetailView):
-#     # form = ""
-#     # if request.method== 'POST':
-#     #     form=Form(request.POST)
-#     #     if form.is_valid():
-#     #         print(type(request.user))
-#     #         form.save()
-#     #         donation =Donation()
-#     #         post = get_object_or_404(Post, pk=pk)
-#     #         qty=form.cleaned_data.get('quantity')
-#     #         donation.quantity=qty
-#     #         donation.receiver= post.author
-#     #         donation.donor= request.user
-#     #         donation.category= post.category
-#     #         donation.save()
-#     #         send_mail('Corona Rangers has some great news for you',f' {donation.donor} ({request.user.email}) wants to donate  {qty} { donation.category}',settings.EMAIL_HOST_USER,[f'{post.author.email}'],fail_silently=False)
-#     #         messages.success(request, f'We have notified the NGO, thankyou for the donation.The NGO will contact you')
-#     #         return redirect('dashboard')
-#     #     else:
-#     #         pass
-#     # else:
-#     #     form=Form()
-#     #     context = {
-#     #         "form": form,
-#     #         "post": get_object_or_404(Post, pk=pk),
-#     #     }
-#     #     return render(request,'blog/post_detail.html',{
-#     #             "form": form,
-#     #             "post": get_object_or_404(Post, pk=pk),
-#     #         })
-#     model: Post
- 
 
 def DashboardView(request):
     donations = Donation.objects.filter(donor=request.user)
@@ -121,40 +59,6 @@ def DashboardView(request):
     }
     return render(request, 'blog/dashboard.html', context)
     
-# class DonateView(DetailView):
-#     model=Donation
-#     form_class = Form
-#     template_name = 'blog/donate.html'
-
-#     def form_valid(self, form):
-#         form.instance.donor = self.request.user
-#         return super().form_valid(form)
-
-
-# def Donate(request,pk):
-#     if request.method== 'POST':
-#         forms=Form(request.POST)
-#         if form.is_valid():
-#             user=form.save()
-#             donation =Donation()
-#             post =Post()
-#             qty=form.clean_data.get('quantity')
-#             donation.quantity=qty
-#             donation.receiver= post.author
-#             donation.donor= self.request.user
-#             donation.categories= post.categories
-#             donation.save()
-#             messages.success(request, f'Thankyou for donating!')
-#             return redirect('dashboard')
-#     else:
-#         form=Form()
-#         post = Post.objects.filter(id=pk)
-#         context = {
-#             "form": form,
-#             "post": post
-#         }
-#     return render(request,'blog/post_detail.html',context)
-
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -210,9 +114,6 @@ def mainhome(request):
 def news(request):
     return render(request, 'blog/news.html')
 
-# def CategoryView(request, cats):
-#     category_posts = Post.objects.filter(category=cats)
-#     return render(request, 'blog/categories.html', {'cats': cats, 'category_posts': category_posts})
 
 def dashboard(request):
     import requests
@@ -235,7 +136,6 @@ def dashboard(request):
         output =[]
         form =StockForm()
         
-        # pform = PortfolioForm()
 
         for ticker_item in ticker:
             api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=pk_873df7d7e66c4c1fac2b36e03ab53d51")
@@ -244,69 +144,17 @@ def dashboard(request):
                 output.append(api)
             except Exception as e:
                 api = "Error..."
-        # print(output)
+        
         for ticker_item in ticker1:
             api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=pk_873df7d7e66c4c1fac2b36e03ab53d51")
             try:
                 api =json.loads(api_request.content) 
                 out.append(api)
-                # print(output)
+               
             except Exception as e:
                 api = "Error..."
         
         return render(request, 'blog/dashboard.html',{'form':form,'ticker':ticker,'output': output,'out':out,'ticker1':ticker1})
-# def dashboard(request):
-#     import requests
-#     import json
-
-#     if request.method == 'POST':
-#         form =StockForm(request.POST or None)
-
-#         if form.is_valid():
-#             form.instance.owner = request.user
-#             form.save()
-#             messages.success(request,("Stock has been Added!"))
-#             return redirect('dashboard')
-        
-#     else:  
-#         ticker =Stock.objects.filter(owner=request.user)
-#         output =[]
-#         for ticker_item in ticker:
-#             api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=pk_873df7d7e66c4c1fac2b36e03ab53d51")
-
-#             try:
-#                 api =json.loads(api_request.content)
-#                 output.append(api)
-#             except Exception as e:
-#                 api = "Error..."
-#         return render(request, 'blog/dashboard.html',{'ticker':ticker,'output': output})
-
-# def dashboard(request):
-#     import requests
-#     import json
-
-#     if request.method == 'POST':
-#         form =StockForm(request.POST or None)
-
-#         if form.is_valid():
-#             form.instance.owner = request.user
-#             form.save()
-#             messages.success(request,("Stock has been Added!"))
-#             return redirect('dashboard')
-        
-#     else:  
-#         ticker =Wishlist.objects.filter(owner=request.user)
-#         output =[]
-#         for ticker_item in ticker:
-#             api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=pk_873df7d7e66c4c1fac2b36e03ab53d51")
-
-#             try:
-#                 print(api_request.content)
-#                 api =json.loads(api_request.content)
-#                 output.append(api)
-#             except Exception as e:
-#                 api = "Error..."
-#         return render(request, 'blog/dashboard.html',{'ticker':ticker,'output': output})
 
 def portfolio(request):
     import requests
@@ -318,12 +166,6 @@ def portfolio(request):
         if form.is_valid():
             form.instance.owner = request.user
             form.save()
-            # ticker=form.cleaned_data.get('ticker')
-            # price=form.cleaned_data.get('price')
-            # quantity=form.cleaned_data.get('quantity')
-            # print(quantity)
-            # stock = Stock()
-            # stock.save()
             messages.success(request,("Stock has been Added!"))
             return redirect('portfolio')
         

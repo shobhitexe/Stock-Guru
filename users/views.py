@@ -47,7 +47,6 @@ class ProfileView(DetailView):
 
 def contact(request):
     if request.method=="POST":
-        print(request)
         name=request.POST.get('name', '')
         email=request.POST.get('email', '')
         phone=request.POST.get('phone', '')
