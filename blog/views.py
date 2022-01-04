@@ -11,6 +11,7 @@ import json
 from dotenv import load_dotenv,find_dotenv
 load_dotenv(find_dotenv())
 from pathlib import Path
+
 BASE_DIR = Path(__file__).resolve().parent.parent  
 
 
@@ -27,6 +28,8 @@ def result(request):
     stock=request.GET['Stock']
     predictor=Predictor()
     dataset=predictor.readsql(stock.title())
+    print(stock)
+    print(dataset)
     dataset=predictor.get_live_data(stock,dataset)
     predicted_df=predictor.predict(dataset,stock)
     historic_plot=predictor.show_historic(dataset,stock)

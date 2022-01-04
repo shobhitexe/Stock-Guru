@@ -92,7 +92,7 @@ class Predictor(models.Model):
 
     def get_live_data(self,stock,dataset):
         if dataset.empty or dataset['date'][len(dataset)-1] < datetime.date.today():
-            start = None
+            start = None 
             end = datetime.date.today()
             if dataset.empty:
                 start = datetime.date(2000,1,1)
