@@ -182,21 +182,25 @@
 * Visit the link and explore the webapp
 
 ## Screenshots
-### Covid 19 Trend Predictor
-![predict](https://user-images.githubusercontent.com/73059947/125186505-51090380-e248-11eb-8abc-e46cbb35d440.jpg)
+### Landing Page
+![land](https://user-images.githubusercontent.com/73059947/148243369-cd2c8a9e-51c8-425e-a48e-e09f2d0f0887.png)
 
 
-### Covid 19 Tweet Sentiment Analyzer
-![sentiment](https://user-images.githubusercontent.com/73059947/147418228-5c51cc75-848b-4d2f-9d7a-af7267ceef6e.png)
+### Discussion Page
+![discuss](https://user-images.githubusercontent.com/73059947/148243456-2c88b234-997d-4021-bdbe-dd14c6455579.png)
 
 
-### Covid 19 Fake News Detector
-![fakenews](https://user-images.githubusercontent.com/73059947/147418279-4346fc83-5192-4f0c-b66d-722de3f79d9f.png)
+### Portfolio and Watchlist Page
+![portfolio](https://user-images.githubusercontent.com/73059947/148243553-2df0952f-16d3-4239-b6bc-1072887ebd92.png)
 
 
-### Covid 19 Article Summarizer
-![summarize](https://user-images.githubusercontent.com/73059947/147418295-426b52f1-31f4-4661-878f-8f46457c8ba0.png)
+### Create Post Page
+![post](https://user-images.githubusercontent.com/73059947/148243705-54b5e036-5e1f-42ad-8a37-06e2de90e189.png)
 
 
-### Covid 19 Chatbot
-![chatbot](https://user-images.githubusercontent.com/73059947/147418238-ed9f105e-fdc6-4279-88d2-86b33336ab34.png)
+### Stock Price Prediction Page
+![predict](https://user-images.githubusercontent.com/73059947/148243864-65352adc-a6b6-4856-9ff5-ff001f2393f7.png)
+
+
+### Result Page
+![result](https://user-images.githubusercontent.com/73059947/148244003-bd51915f-d74e-4050-9e76-f48f908e92c8.png)
