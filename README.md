@@ -2,6 +2,7 @@
 ## Features
 1. Forecast Closing Price values of various stocks for next 30 days
 * Live stock data is fetched from yahoo finance using python yfinance library to make predictions
+* LSTM deep learning model has been used to make predictions
 2. Maintain Portfolio of invested stocks 
 3. Maintain Wishlist to keep track of stocks 
 4. Participate in discussions and post queries regarding stock market 
