@@ -169,7 +169,7 @@
 * Icon
 * Input Field
 * Navigation Bar
-* Select field
+* Selection field
 ## Installation
 1. Instructions to visit web app
 * visit link : https://stockguruweb.pythonanywhere.com/
