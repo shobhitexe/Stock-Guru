@@ -32,23 +32,33 @@
 
 ### Landing Page
 ![land](https://user-images.githubusercontent.com/73059947/148243369-cd2c8a9e-51c8-425e-a48e-e09f2d0f0887.png)
-
+<br>
+<br>
+<br>
 
 ### Discussion Page
 ![discuss](https://user-images.githubusercontent.com/73059947/148243456-2c88b234-997d-4021-bdbe-dd14c6455579.png)
-
+<br>
+<br>
+<br>
 
 ### Portfolio and Watchlist Page
 ![portfolio](https://user-images.githubusercontent.com/73059947/148243553-2df0952f-16d3-4239-b6bc-1072887ebd92.png)
-
+<br>
+<br>
+<br>
 
 ### Create Post Page
 ![post](https://user-images.githubusercontent.com/73059947/148243705-54b5e036-5e1f-42ad-8a37-06e2de90e189.png)
-
+<br>
+<br>
+<br>
 
 ### Stock Price Prediction Page
 ![predict](https://user-images.githubusercontent.com/73059947/148243864-65352adc-a6b6-4856-9ff5-ff001f2393f7.png)
-
+<br>
+<br>
+<br>
 
 ### Result Page
 ![result](https://user-images.githubusercontent.com/73059947/148244003-bd51915f-d74e-4050-9e76-f48f908e92c8.png)
