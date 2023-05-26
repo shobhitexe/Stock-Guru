@@ -7,7 +7,8 @@
 4. Forecast closing price values of various stocks for next 30 days
     * Live stock data has been fetched from yahoo finance using python yfinance library
     * LSTM deep learning model has been used to make predictions
-    
+<br>
+
 ## Tech Stack
 1. Front-End 
     * HTML used for structuring the web application
@@ -16,7 +17,8 @@
     
 2. Back-End
     * Python django framework for creating the web application
-  
+<br>
+
 ## Installation
 1. Instructions to visit web application
    * visit link : https://stockguruweb.pythonanywhere.com/
@@ -27,6 +29,7 @@
    * In the root directory of project, type `python manage.py runserver` in command prompt
    * Django will serve the web application on localhost and will provide the link in command prompt
    * Visit the link and explore the web application
+<br>
 
 ## Screenshots
 
