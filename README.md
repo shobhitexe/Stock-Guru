@@ -1,20 +1,23 @@
 # Stock Guru
+
 ## Features
-1. Forecast Closing Price values of various stocks for next 30 days
-* Live stock data is fetched from yahoo finance using python yfinance library to make predictions
-* LSTM deep learning model has been used to make predictions
-2. Maintain Portfolio of invested stocks 
-3. Maintain Wishlist to keep track of stocks 
-4. Participate in discussions and post queries regarding stock market 
-## Tech Stack Used
-1. FrontEnd 
-* HTML used for structuring the webapp
-* CSS used for styling the webapp
-* Javascript used for bulding a dynamic webapp
-2. BackEnd
-* Python django framework for creating the webapp
-## Project Components
-1. Libraries
+1. Maintain portfolio of invested stocks 
+2. Participate in discussions and post queries regarding stock market 
+3. Maintain wishlist to keep track of stocks 
+4. Forecast closing price values of various stocks for next 30 days
+    * Live stock data has been fetched from yahoo finance using python yfinance library
+    * LSTM deep learning model has been used to make predictions
+    
+## Tech Stack
+1. Front-End 
+    * HTML used for structuring the web application
+    * CSS used for styling the web application
+    * Javascript used for bulding a dynamic web application
+    
+2. Back-End
+    * Python django framework for creating the web application
+  
+## Libraries
 * absl-py==1.0.0
 * argcomplete==1.12.3
 * argon2-cffi==21.3.0
@@ -163,13 +166,6 @@
 * yfinance==0.1.68
 * zipp==3.6.0
 
-2. UI Components
-* Button 
-* Form
-* Icon
-* Input Field
-* Navigation Bar
-* Selection field
 ## Installation
 1. Instructions to visit web app
 * visit link : https://stockguruweb.pythonanywhere.com/
