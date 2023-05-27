@@ -21,7 +21,7 @@
 
 ## Installation
 1. Instructions to visit web application
-   * visit link : https://stockguruweb.pythonanywhere.com/
+   * Visit link : https://stockguruweb.pythonanywhere.com/
 
 2. Instructions to RUN the project locally
    * Download the project folder
