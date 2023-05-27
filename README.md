@@ -16,7 +16,7 @@
     * Javascript used for bulding a dynamic web application
     
 2. Back-End
-    * Python django framework for creating the web application
+    * Python django framework used for creating the web application
 <br>
 
 ## Installation
