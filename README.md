@@ -8,8 +8,8 @@ Stock Guru is a web application that can forecast the closing price of stocks fo
 2. Participate in discussions and post queries regarding stock market 
 3. Maintain wishlist to keep track of stocks 
 4. Forecast closing price values of various stocks for next 30 days
-    * Live stock data has been fetched from yahoo finance using python yfinance library
-    * LSTM deep learning model has been used to make predictions
+    * Live stock data is fetched from yahoo finance using python yfinance library
+    * LSTM deep learning model is used to make predictions
 <br>
 
 ## Tech Stack
