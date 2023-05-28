@@ -1,4 +1,7 @@
 # Stock Guru
+Stock Guru is a web application that can forecast the closing price of stocks for the next 30 days. Nowadays many people invest in stocks and require to make informed decisions to gain profits. Stock Guru can assist such individuals by predicting the trend of the closing price of stocks using Deep Learning LSTM model. Since the stock market is highly volatile and unpredictable, Stock Guru was developed to analyze how well the LSTM model can forecast closing prices of stocks
+<br>
+<br>
 
 ## Features
 1. Maintain portfolio of invested stocks 
